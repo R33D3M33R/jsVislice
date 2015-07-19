@@ -1,6 +1,6 @@
 /*
  @author: Andrej Mernik
- @version: 0.1
+ @version: 0.2
 
 
  @licstart  The following is the entire license notice for the
@@ -173,15 +173,16 @@ var visliceView = {
         (element.is(':visible')) ? element.hide() : element.show();
     },
     initKeys: function() {
+        var i;
         var self = this;
         $('#letters').find('.disabled').each(function() {self.toggleKey($(this))});
         if (visliceWords.guesses.correct.length > 0) {
-            for (var i=0; i < visliceWords.guesses.correct.length; i++) {
+            for (i=0; i < visliceWords.guesses.correct.length; i++) {
                 this.toggleKey($('#key' + visliceWords.guesses.correct[i].toUpperCase()));
             }
         }
         if (visliceWords.guesses.wrong.length > 0) {
-            for (var i=0; i < visliceWords.guesses.wrong.length; i++) {
+            for (i=0; i < visliceWords.guesses.wrong.length; i++) {
                 this.toggleKey($('#key' + visliceWords.guesses.wrong[i].toUpperCase()));
             }
         }
