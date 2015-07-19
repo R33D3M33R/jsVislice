@@ -44,7 +44,8 @@ var visliceLevels = {
         visliceView.updateView();
     },
     isGameOver: function() {
-        return this.calculateLives() < 1;
+        var livesCalc = this.calculateLives();
+        return (livesCalc.total - livesCalc.lost) < 1;
     }
 };
 
