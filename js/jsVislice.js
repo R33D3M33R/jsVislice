@@ -206,16 +206,16 @@ var visliceView = {
         var livesLostBig = Math.floor(livesCalc.lost / visliceLevels.mergeLivesAt);
         var livesTotalBig = Math.floor((livesCalc.total - livesCalc.lost) / visliceLevels.mergeLivesAt);
         for (i=0; i < livesLostSmall; i++) {
-            livesContainer.append('<div>[1 lost]</div>')
+            livesContainer.append('<div class="glyphicon glyphicon-heart-empty"></div>')
         }
         for (i=0; i < livesTotalSmall; i++) {
-            livesContainer.append('<div>[1 heart]</div>')
+            livesContainer.append('<div class="glyphicon glyphicon-heart"></div>')
         }
         for (i=0; i < livesLostBig; i++) {
-            livesContainer.append('<div>{5 lost}</div>')
+            livesContainer.append('<div class="glyphicon glyphicon-heart-empty big-heart"></div>')
         }
         for (i=0; i < livesTotalBig; i++) {
-            livesContainer.append('<div>{5 hearts}</div>')
+            livesContainer.append('<div class="glyphicon glyphicon-heart big-heart"></div>')
         }
     },
     displayScore: function() {

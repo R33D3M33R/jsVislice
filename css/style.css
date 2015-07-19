@@ -1,3 +1,10 @@
 #howto, #highscores, #game {
     display: none;
 }
+#lives > div {
+    color: #FF0000;
+    display: block;
+}
+#lives .big-heart {
+    font-size: 200%;
+}
