@@ -34,7 +34,7 @@ var visliceLevels = {
     levelupAt: 5, // level up at each
     levelScore: 50, // initial score for a successful level
     calculateLives: function() {
-        return (this.level > 0) ? Math.floor(this.level / this.levelupAt) + this.lives - visliceWords.guesses.wrong.length : this.lives;
+        return (this.level > 0) ? { total: Math.floor(this.level / this.levelupAt) + this.lives, lost: visliceWords.guesses.wrong.length} : {total: this.lives, lost: 0};
     },
     newLevel: function() {
         this.level++;
@@ -196,7 +196,8 @@ var visliceView = {
     },
     displayLives: function() {
         var livesContainer = $('#lives');
-        var numLives = visliceLevels.calculateLives();
+        var livesCalc = visliceLevels.calculateLives();
+        var numLives = livesCalc.total - livesCalc.lost;
         livesContainer.html('');
         for (var i=0; i < numLives; i++) {
             livesContainer.append('<div>X</div>')
