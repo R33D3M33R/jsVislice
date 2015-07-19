@@ -31,6 +31,7 @@
 var visliceLevels = {
     level: 0, // starting level
     lives: 6, // initial lives at level 0
+    mergeLivesAt: 5, // merge small lives into big
     levelupAt: 5, // level up at each
     levelScore: 50, // initial score for a successful level
     calculateLives: function() {
@@ -195,12 +196,25 @@ var visliceView = {
         $('#wrongGuesses').html('<strike>' + visliceWords.guesses.wrong.join(', ') + '</strike>')
     },
     displayLives: function() {
+        var i;
         var livesContainer = $('#lives');
-        var livesCalc = visliceLevels.calculateLives();
-        var numLives = livesCalc.total - livesCalc.lost;
         livesContainer.html('');
-        for (var i=0; i < numLives; i++) {
-            livesContainer.append('<div>X</div>')
+        var livesCalc = visliceLevels.calculateLives();
+        var livesLostSmall = Math.floor(livesCalc.lost % visliceLevels.mergeLivesAt);
+        var livesTotalSmall = Math.floor((livesCalc.total - livesCalc.lost) % visliceLevels.mergeLivesAt);
+        var livesLostBig = Math.floor(livesCalc.lost / visliceLevels.mergeLivesAt);
+        var livesTotalBig = Math.floor((livesCalc.total - livesCalc.lost) / visliceLevels.mergeLivesAt);
+        for (i=0; i < livesLostSmall; i++) {
+            livesContainer.append('<div>[1 lost]</div>')
+        }
+        for (i=0; i < livesTotalSmall; i++) {
+            livesContainer.append('<div>[1 heart]</div>')
+        }
+        for (i=0; i < livesLostBig; i++) {
+            livesContainer.append('<div>{5 lost}</div>')
+        }
+        for (i=0; i < livesTotalBig; i++) {
+            livesContainer.append('<div>{5 hearts}</div>')
         }
     },
     displayScore: function() {
