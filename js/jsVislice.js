@@ -244,14 +244,13 @@ var visliceView = {
     },
     displayHighScores: function() {
         var highScores = visliceScores.loadHighScores();
-        var element = $('#highscores');
-        var beforeElement = element.find('h2');
+        var element = $('#highscores').find('div > div');
         if (!visliceScores.checkStorage()) {
-            $(('<p>The HTML5 LocalStorage could not be intialized. High scores are not available.</p>').insertAfter(beforeElement));
+            element.html('The HTML5 LocalStorage could not be intialized. High scores are not available.');
         } else if (highScores === null) {
-            $('<p>No items yet! Keep playing for highscores.</p>').insertAfter(beforeElement);
+            element.html('No items yet! Keep playing for highscores.');
         } else {
-            $('<ol></ol>').insertAfter(beforeElement);
+            element.html('<ol></ol>');
             var list  = element.find('ol');
             for (var i=0; i < highScores.length; i++) {
                 list.append('<li>' + highScores[i].playerName + ' scored ' + highScores[i].score + ' and got to the level ' + highScores[i].level + '</li>');
