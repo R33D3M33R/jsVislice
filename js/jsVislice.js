@@ -170,9 +170,6 @@ var visliceController = {
             this.click(String.fromCharCode(key));
         }
     },
-    toggleHighScores: function(element) {
-        visliceView.displayHighScores(element);
-    },
     init: function() {
         // setup player
         var playerName = $('#playerName').val();
@@ -245,8 +242,9 @@ var visliceView = {
         this.displayScore();
         this.displayLevel();
     },
-    displayHighScores: function(element) {
+    displayHighScores: function() {
         var highScores = visliceScores.loadHighScores();
+        var element = $('#highscores');
         var beforeElement = element.find('h2');
         if (!visliceScores.checkStorage()) {
             $(('<p>The HTML5 LocalStorage could not be intialized. High scores are not available.</p>').insertAfter(beforeElement));
@@ -280,6 +278,7 @@ $(document).ready(function() {
     );
     buttonBar.find('button[name=highscores]').on('click', function() {
             window.location.hash = 'highscores';
+            visliceView.displayHighScores();
         }
     );
     buttonBar.find('button[name=clear]').on('click', function() {
@@ -300,5 +299,4 @@ $(document).ready(function() {
             visliceController.click($(this).html());
         }
     );
-    visliceController.toggleHighScores($('#highscores'));
 });
