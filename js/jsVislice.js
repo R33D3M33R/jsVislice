@@ -1,6 +1,6 @@
 /*
  @author: Andrej Mernik
- @version: 0.5
+ @version: 0.5.1
 
 
  @licstart  The following is the entire license notice for the
@@ -215,11 +215,12 @@ var visliceController = {
         );
     },
     registerKeys: function(letters) {
+        var self = this;
         $(document).on('keydown', function(e) {
-            this.keyPress(e);
+            self.keyPress(e);
         });
         letters.find('button').on('click', function() {
-                this.click($(this).html());
+                self.click($(this).html());
             }
         );
     }
@@ -298,6 +299,7 @@ var visliceView = {
             game: [availButtons[0], availButtons[3], availButtons[5]]
          };
         if (visliceWords.currentWordID !== null) {
+            buttonsShown.welcome.push(availButtons[2]);
             buttonsShown.instructions.push(availButtons[2]);
             buttonsShown.highscores.push(availButtons[2]);
         }
