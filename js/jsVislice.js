@@ -30,6 +30,7 @@
 
 var visliceLevels = {
     level: 0, // starting level
+    selectedDifficulty: 'normal', // default difficulty
     lives: 6, // initial lives at level 0
     mergeLivesAt: 5, // merge small lives into big
     levelupAt: 5, // level up at each
@@ -161,6 +162,8 @@ var visliceController = {
         // setup player
         var playerName = $('#playerName').val();
         if (playerName.length !== 0) visliceScores.playerName = playerName;
+        var selectedDifficulty = $('#difficulty').find('input:radio[name=difficulty]:checked').val();
+        if (selectedDifficulty.length !== 0) visliceLevels.selectedDifficulty = difficulty;
         visliceLevels.newLevel();
         visliceView.toggleElement('#welcome');
         visliceView.toggleElement('#game');
