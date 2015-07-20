@@ -164,6 +164,9 @@ var visliceController = {
             alert('Game over!');
         }
     },
+    keyPress: function(e) {
+        console.log(e);
+    },
     toggleHighScores: function(element) {
         visliceView.displayHighScores(element);
     },
@@ -266,6 +269,9 @@ $(document).ready(function() {
             visliceController.init();
         }
     );
+    $(document).on('keydown', function(e) {
+        visliceController.keyPress(e);
+    });
     $('#letters').find('button').on('click', function() {
             visliceController.click($(this));
         }
