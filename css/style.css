@@ -8,6 +8,9 @@
 #lives .big-heart {
     font-size: 200%;
 }
+body > .container:first-child {
+    min-height: 500px;
+}
 #letters button {
     width: 3em;
     height: 3em;
