@@ -1,5 +1,8 @@
-#howto, #highscores, #game {
+#instructions, #highscores, #game, #welcome {
     display: none;
+}
+#instructions:target, #highscores:target, #game:target, #welcome:target {
+    display: block;
 }
 #lives > div {
     color: #FF0000;

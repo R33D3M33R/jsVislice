@@ -180,16 +180,10 @@ var visliceController = {
         var selectedDifficulty = $('#difficulty').find('input:radio[name=difficulty]:checked').val();
         if (selectedDifficulty.length !== 0) visliceLevels.selectedDifficulty = selectedDifficulty;
         visliceLevels.newLevel();
-        visliceView.toggleElement('#welcome');
-        visliceView.toggleElement('#game');
     }
 };
 
 var visliceView = {
-    toggleElement: function(e) {
-        var element = $(e);
-        (element.is(':visible')) ? element.hide() : element.show();
-    },
     initKeys: function() {
         var i;
         var self = this;
@@ -269,7 +263,9 @@ var visliceView = {
 };
 
 $(document).ready(function() {
-    $('#welcome').find('button').on('click', function() {
+    window.location.hash = 'welcome';
+    $('#buttons').find('button[name=play]').on('click', function() {
+            window.location.hash = 'game';
             visliceController.init();
         }
     );
