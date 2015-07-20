@@ -153,8 +153,8 @@ var visliceWords = {
 
 var visliceController = {
     click: function(key) {
-        visliceView.toggleKey(key);
-        visliceWords.doGuess(key.html().toLowerCase());
+        //visliceView.toggleKey(key);
+        visliceWords.doGuess(key.toLowerCase());
         visliceWords.prepareWord();
         visliceView.updateView();
         if (visliceWords.checkGuess()) {
@@ -165,7 +165,10 @@ var visliceController = {
         }
     },
     keyPress: function(e) {
-        console.log(e);
+        var key = e.keyCode;
+        if (key >= 65 && key <= 90) {
+            this.click(String.fromCharCode(key));
+        }
     },
     toggleHighScores: function(element) {
         visliceView.displayHighScores(element);
@@ -273,7 +276,7 @@ $(document).ready(function() {
         visliceController.keyPress(e);
     });
     $('#letters').find('button').on('click', function() {
-            visliceController.click($(this));
+            visliceController.click($(this).html());
         }
     );
     visliceController.toggleHighScores($('#highscores'));
