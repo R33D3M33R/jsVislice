@@ -2,7 +2,7 @@
 A simple hangman game with a twist. Built with JQuery and Bootstrap.
 # TODO
 * [ ] cleanup and improve UI (CSS)
-* [ ] connect panels and buttons
+* [x] connect panels and buttons
 * [ ] add date display and clear button to highScores 
 * [ ] remember last player and prefill his name
 * [ ] create parser to make JSON wordlists with words sorted by difficulty
