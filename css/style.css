@@ -8,3 +8,7 @@
 #lives .big-heart {
     font-size: 200%;
 }
+#letters button {
+    width: 3em;
+    height: 3em;
+}
