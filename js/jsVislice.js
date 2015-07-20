@@ -39,7 +39,7 @@ var visliceLevels = {
         if (this.level > 1 && numLives < this.maxLives) {
             return {total: numLives, lost: visliceWords.guesses.wrong.length};
         } else if (this.level > 1 && numLives >= this.maxLives) {
-            return  {total: this.maxLives, lost: visliceWords.guesses.wrong.length};
+            return {total: this.maxLives, lost: visliceWords.guesses.wrong.length};
         } else {
             return {total: this.difficultyData().lives, lost: 0};
         }
@@ -177,6 +177,45 @@ var visliceController = {
         var selectedDifficulty = $('#difficulty').find('input:radio[name=difficulty]:checked').val();
         if (selectedDifficulty.length !== 0) visliceLevels.selectedDifficulty = selectedDifficulty;
         visliceLevels.newLevel();
+    },
+    registerButtonBar: function(buttonBar) {
+        var self = this;
+        buttonBar.find('button[name=new]').on('click', function() {
+                window.location.href = '#welcome';
+            }
+        );
+        buttonBar.find('button[name=play]').on('click', function() {
+                window.location.hash = 'game';
+                self.init();
+            }
+        );
+        buttonBar.find('button[name=continue]').on('click', function() {
+                window.location.hash = 'game';
+            }
+        );
+        buttonBar.find('button[name=highscores]').on('click', function() {
+                window.location.hash = 'highscores';
+                visliceScores.displayHighScores();
+            }
+        );
+        buttonBar.find('button[name=clear]').on('click', function() {
+                window.location.hash = 'highscores';
+                visliceScores.clearStorage();
+            }
+        );
+        buttonBar.find('button[name=instructions]').on('click', function() {
+                window.location.hash = 'instructions';
+            }
+        );
+    },
+    registerKeys: function(letters) {
+        $(document).on('keydown', function(e) {
+            this.keyPress(e);
+        });
+        letters.find('button').on('click', function() {
+                this.click($(this).html());
+            }
+        );
     }
 };
 
@@ -261,41 +300,6 @@ var visliceView = {
 
 $(document).ready(function() {
     window.location.hash = 'welcome';
-    var buttonBar = $('#buttons');
-    buttonBar.find('button[name=new]').on('click', function() {
-            window.location.hash = 'welcome';
-        }
-    );
-    buttonBar.find('button[name=play]').on('click', function() {
-            window.location.hash = 'game';
-            visliceController.init();
-        }
-    );
-    buttonBar.find('button[name=continue]').on('click', function() {
-            window.location.hash = 'game';
-        }
-    );
-    buttonBar.find('button[name=highscores]').on('click', function() {
-            window.location.hash = 'highscores';
-            visliceView.displayHighScores();
-        }
-    );
-    buttonBar.find('button[name=clear]').on('click', function() {
-            window.location.hash = 'highscores';
-            visliceScores.clearStorage();
-        }
-    );
-    buttonBar.find('button[name=instructions]').on('click', function() {
-            window.location.hash = 'instructions';
-        }
-    );
-
-
-    $(document).on('keydown', function(e) {
-        visliceController.keyPress(e);
-    });
-    $('#letters').find('button').on('click', function() {
-            visliceController.click($(this).html());
-        }
-    );
+    visliceController.registerButtonBar($('#buttons'));
+    visliceController.registerKeys($('#letters'));
 });
