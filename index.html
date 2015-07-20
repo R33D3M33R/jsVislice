@@ -13,11 +13,24 @@
             <div class="col-md-4 col-sm-8">
                 <h2>Welcome to jsVislice</h2>
                 <p>jsVislice is a JavaScript version of the pen and paper game Hangman (gallows == vislice in Slovenian) with a twist. After correctly guessing the word, you don't start over again, but advance to the next level with a harder word. How far can you get?</p>
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input type="text" class="form-control" id="playerName" placeholder="Anonymous">
+                <form>
+                    <h3>Name for highscores</h3>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                        <input type="text" class="form-control" id="playerName" placeholder="Enter your name here">
+                    </div>
+                    <h3>Difficulty</h3>
+                    <div class="radio">
+                        <label><input type="radio" name="difficulty" value="easy"><strong>Easy</strong> (6 starting lives, +1 life every 2 levels, 25 points per level)</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="difficulty" value="normal" checked><strong>Normal</strong> (6 starting lives, +1 life every 5 levels, 50 points per level)</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="difficulty" value="hard"><strong>Hard</strong> (6 starting lives, +1 life every 10 levels, 100 points per level)</label>
+                    </div>
                     <span class="input-group-btn"><button class="btn btn-primary" type="button">Play!</button></span>
-                </div>
+                </form>
             </div>
             <div class="col-md-4 col-sm-2"></div>
         </div>
