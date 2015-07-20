@@ -264,11 +264,35 @@ var visliceView = {
 
 $(document).ready(function() {
     window.location.hash = 'welcome';
-    $('#buttons').find('button[name=play]').on('click', function() {
+    var buttonBar = $('#buttons');
+    buttonBar.find('button[name=new]').on('click', function() {
+            window.location.hash = 'welcome';
+        }
+    );
+    buttonBar.find('button[name=play]').on('click', function() {
             window.location.hash = 'game';
             visliceController.init();
         }
     );
+    buttonBar.find('button[name=continue]').on('click', function() {
+            window.location.hash = 'game';
+        }
+    );
+    buttonBar.find('button[name=highscores]').on('click', function() {
+            window.location.hash = 'highscores';
+        }
+    );
+    buttonBar.find('button[name=clear]').on('click', function() {
+            window.location.hash = 'highscores';
+            visliceScores.clearStorage();
+        }
+    );
+    buttonBar.find('button[name=instructions]').on('click', function() {
+            window.location.hash = 'instructions';
+        }
+    );
+
+
     $(document).on('keydown', function(e) {
         visliceController.keyPress(e);
     });
