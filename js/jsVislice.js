@@ -31,12 +31,10 @@
 var visliceLevels = {
     level: 0, // starting level
     selectedDifficulty: 'normal', // default difficulty
-    lives: 6, // initial lives at level 0
+    difficultyDefaults: {easy: {lives: 6, levelupAt: 2, levelScore: 25}, normal: {lives: 6, levelupAt: 5, levelScore: 50}, hard: {lives: 6, levelupAt: 10, levelScore: 100}},
     mergeLivesAt: 5, // merge small lives into big
-    levelupAt: 5, // level up at each
-    levelScore: 50, // initial score for a successful level
     calculateLives: function() {
-        return (this.level > 0) ? { total: Math.floor(this.level / this.levelupAt) + this.lives, lost: visliceWords.guesses.wrong.length} : {total: this.lives, lost: 0};
+        return (this.level > 0) ? { total: Math.floor(this.level / this.difficultyData().levelupAt) + this.difficultyData().lives, lost: visliceWords.guesses.wrong.length} : {total: this.difficultyData().lives, lost: 0};
     },
     newLevel: function() {
         this.level++;
@@ -47,6 +45,9 @@ var visliceLevels = {
     isGameOver: function() {
         var livesCalc = this.calculateLives();
         return (livesCalc.total - livesCalc.lost) < 1;
+    },
+    difficultyData: function() {
+        return this.difficultyDefaults[this.selectedDifficulty];
     }
 };
 
@@ -81,7 +82,7 @@ var visliceScores = {
         return (itemB.score - itemA.score);
     },
     calculateScore: function() {
-        return (visliceWords.numWrongGuesses > 0) ? Math.floor((visliceLevels.level - 1) * visliceLevels.levelScore / visliceWords.numWrongGuesses) : Math.floor((visliceLevels.level - 1) * visliceLevels.levelScore);
+        return (visliceWords.numWrongGuesses > 0) ? Math.floor((visliceLevels.level - 1) * visliceLevels.difficultyData().levelScore / visliceWords.numWrongGuesses) : Math.floor((visliceLevels.level - 1) * visliceLevels.difficultyData().levelScore);
     },
     clearStorage: function() {
         if (this.checkStorage() && localStorage.length > 0) localStorage.clear();
@@ -163,7 +164,7 @@ var visliceController = {
         var playerName = $('#playerName').val();
         if (playerName.length !== 0) visliceScores.playerName = playerName;
         var selectedDifficulty = $('#difficulty').find('input:radio[name=difficulty]:checked').val();
-        if (selectedDifficulty.length !== 0) visliceLevels.selectedDifficulty = difficulty;
+        if (selectedDifficulty.length !== 0) visliceLevels.selectedDifficulty = selectedDifficulty;
         visliceLevels.newLevel();
         visliceView.toggleElement('#welcome');
         visliceView.toggleElement('#game');
