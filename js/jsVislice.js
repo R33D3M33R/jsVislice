@@ -33,8 +33,16 @@ var visliceLevels = {
     selectedDifficulty: 'normal', // default difficulty
     difficultyDefaults: {easy: {lives: 6, levelupAt: 2, levelScore: 25}, normal: {lives: 6, levelupAt: 5, levelScore: 50}, hard: {lives: 6, levelupAt: 10, levelScore: 100}},
     mergeLivesAt: 5, // merge small lives into big
+    maxLives: 20,
     calculateLives: function() {
-        return (this.level > 0) ? { total: Math.floor(this.level / this.difficultyData().levelupAt) + this.difficultyData().lives, lost: visliceWords.guesses.wrong.length} : {total: this.difficultyData().lives, lost: 0};
+        var numLives = Math.floor((this.level - 1) / this.difficultyData().levelupAt) + this.difficultyData().lives;
+        if (this.level > 1 && numLives < this.maxLives) {
+            return {total: numLives, lost: visliceWords.guesses.wrong.length};
+        } else if (this.level > 1 && numLives >= this.maxLives) {
+            return  {total: this.maxLives, lost: visliceWords.guesses.wrong.length};
+        } else {
+            return {total: this.difficultyData().lives, lost: 0};
+        }
     },
     newLevel: function() {
         this.level++;
