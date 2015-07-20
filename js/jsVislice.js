@@ -182,29 +182,35 @@ var visliceController = {
         var self = this;
         buttonBar.find('button[name=new]').on('click', function() {
                 window.location.href = '#welcome';
+                visliceView.displayButtons();
             }
         );
         buttonBar.find('button[name=play]').on('click', function() {
                 window.location.hash = 'game';
+                visliceView.displayButtons();
                 self.init();
             }
         );
         buttonBar.find('button[name=continue]').on('click', function() {
                 window.location.hash = 'game';
+                visliceView.displayButtons();
             }
         );
         buttonBar.find('button[name=highscores]').on('click', function() {
                 window.location.hash = 'highscores';
-                visliceScores.displayHighScores();
+                visliceView.displayButtons();
+                visliceView.displayHighScores();
             }
         );
         buttonBar.find('button[name=clear]').on('click', function() {
                 window.location.hash = 'highscores';
+                visliceView.displayButtons();
                 visliceScores.clearStorage();
             }
         );
         buttonBar.find('button[name=instructions]').on('click', function() {
                 window.location.hash = 'instructions';
+                visliceView.displayButtons();
             }
         );
     },
@@ -281,6 +287,24 @@ var visliceView = {
         this.displayScore();
         this.displayLevel();
     },
+    displayButtons: function() {
+        var availButtons = ['new', 'play', 'continue', 'highscores', 'clear', 'instructions'];
+        var currentPanel = window.location.hash.substr(1);
+        var buttonBar = $('#buttons');
+        var buttonsShown = {
+            welcome: [availButtons[1], availButtons[3], availButtons[5]],
+            instructions: [availButtons[0], availButtons[3]],
+            highscores: [availButtons[0], availButtons[4], availButtons[5]],
+            game: [availButtons[0], availButtons[3], availButtons[5]]
+         };
+        if (visliceWords.currentWordID !== null) {
+            buttonsShown.instructions.push(availButtons[2]);
+            buttonsShown.highscores.push(availButtons[2]);
+        }
+        $.each(availButtons, function(index, value) {
+            (buttonsShown[currentPanel].indexOf(value) === -1) ? buttonBar.find('button[name=' + value + ']').hide() : buttonBar.find('button[name=' + value + ']').show();
+        });
+    },
     displayHighScores: function() {
         var highScores = visliceScores.loadHighScores();
         var element = $('#highscores').find('div > div');
@@ -300,6 +324,7 @@ var visliceView = {
 
 $(document).ready(function() {
     window.location.hash = 'welcome';
+    visliceView.displayButtons();
     visliceController.registerButtonBar($('#buttons'));
     visliceController.registerKeys($('#letters'));
 });

@@ -1,7 +1,7 @@
-#instructions, #highscores, #game, #welcome {
+#welcome, #instructions, #highscores, #game {
     display: none;
 }
-#instructions:target, #highscores:target, #game:target, #welcome:target {
+#welcome:target, #instructions:target, #highscores:target, #game:target {
     display: block;
 }
 #lives > div {
