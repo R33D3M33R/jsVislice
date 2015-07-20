@@ -153,7 +153,7 @@ var visliceWords = {
 
 var visliceController = {
     click: function(key) {
-        //visliceView.toggleKey(key);
+        visliceView.toggleKey(key);
         visliceWords.doGuess(key.toLowerCase());
         visliceWords.prepareWord();
         visliceView.updateView();
@@ -193,20 +193,21 @@ var visliceView = {
     initKeys: function() {
         var i;
         var self = this;
-        $('#letters').find('.disabled').each(function() {self.toggleKey($(this))});
+        $('#letters').find('.disabled').each(function() {self.toggleKey($(this).html())});
         if (visliceWords.guesses.correct.length > 0) {
             for (i=0; i < visliceWords.guesses.correct.length; i++) {
-                this.toggleKey($('#key' + visliceWords.guesses.correct[i].toUpperCase()));
+                this.toggleKey(visliceWords.guesses.correct[i]);
             }
         }
         if (visliceWords.guesses.wrong.length > 0) {
             for (i=0; i < visliceWords.guesses.wrong.length; i++) {
-                this.toggleKey($('#key' + visliceWords.guesses.wrong[i].toUpperCase()));
+                this.toggleKey(visliceWords.guesses.wrong[i]);
             }
         }
     },
     toggleKey: function(key) {
-        (key.hasClass('disabled')) ? key.removeClass('disabled') : key.addClass('disabled');
+        var keyID = $('#key' + key.toUpperCase());
+        (keyID.hasClass('disabled')) ? keyID.removeClass('disabled') : keyID.addClass('disabled');
     },
     displayWord: function() {
         var wordContainer = $('#word');
