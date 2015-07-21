@@ -59,9 +59,23 @@ var visliceLevels = {
 };
 
 var visliceScores = {
-    playerName: 'Anonymous', // default player name
     scoresKey: 'visliceScores', // key used to store scores in localstorage
+    playerKey: 'vislicePlayer', // key used to store last player name
     numScores: 10, // how many scores to keep in localstorage
+    loadPlayerName: function() {
+        if (this.checkStorage()) {
+            var lastPlayer = localStorage.getItem(this.playerKey);
+            return (lastPlayer === null) ? 'Anonymous' : JSON.parse(lastPlayer);
+        }
+        return 'Anonymous';
+    },
+    savePlayerName: function(name) {
+        if (this.checkStorage()) {
+            localStorage.setItem(this.playerKey, JSON.stringify(name));
+            return 'Player name saved!';
+        }
+        return 'Error saving the player!';
+    },
     loadHighScores: function() {
         if (this.checkStorage()) {
             var highScores = localStorage.getItem(this.scoresKey);
@@ -71,7 +85,7 @@ var visliceScores = {
     },
     saveHighScores: function() {
         if (this.checkStorage()) {
-            var currentRecord = {playerName: this.playerName, date: Date.now(), score: this.calculateScore(), level: visliceLevels.level};
+            var currentRecord = {playerName: this.loadPlayerName(), date: Date.now(), score: this.calculateScore(), level: visliceLevels.level};
             localStorage.setItem(this.scoresKey, JSON.stringify(this.sortHighScores(this.loadHighScores(), currentRecord)));
             return 'Score saved!';
         }
@@ -171,7 +185,7 @@ var visliceController = {
     init: function() {
         // setup player
         var playerName = $('#playerName').val();
-        if (playerName.length !== 0) visliceScores.playerName = playerName;
+        if (playerName.length !== 0) visliceScores.savePlayerName(playerName);
         var selectedDifficulty = $('#difficulty').find('input:radio[name=difficulty]:checked').val();
         if (selectedDifficulty.length !== 0) visliceLevels.selectedDifficulty = selectedDifficulty;
         visliceLevels.newLevel();
@@ -224,6 +238,7 @@ var visliceController = {
     },
     gameOver: function() {
         visliceLevels.level = 0;
+        visliceWords.numWrongGuesses = 0;
         visliceWords.currentWordID = null;
         visliceScores.saveHighScores();
         window.location.hash = 'highscores';
