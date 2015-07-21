@@ -339,7 +339,8 @@ var visliceView = {
             element.html('<ol></ol>');
             var list  = element.find('ol');
             for (var i=0; i < highScores.length; i++) {
-                list.append('<li>' + highScores[i].playerName + ' scored ' + highScores[i].score + ' and got to the level ' + highScores[i].level + '</li>');
+                date = new Date(highScores[i].date);
+                list.append('<li>' + highScores[i].playerName + ' scored ' + highScores[i].score + ' (level ' + highScores[i].level + ') on ' + date.toLocaleDateString() + '</li>');
             }
         }
     },
