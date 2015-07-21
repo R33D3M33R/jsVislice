@@ -342,12 +342,17 @@ var visliceView = {
                 list.append('<li>' + highScores[i].playerName + ' scored ' + highScores[i].score + ' and got to the level ' + highScores[i].level + '</li>');
             }
         }
+    },
+    displayPlayerName: function() {
+        var playerName = visliceScores.loadPlayerName();
+        $('#playerName').val((playerName === 'Anonymous') ? '' : playerName);
     }
 };
 
 $(document).ready(function() {
     window.location.hash = 'welcome';
     visliceView.displayButtons();
+    visliceView.displayPlayerName();
     visliceController.registerButtonBar($('#buttons'));
     visliceController.registerKeys($('#letters'));
 });
