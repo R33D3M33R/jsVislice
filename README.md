@@ -1,7 +1,7 @@
 # jsVislice
 A simple hangman game with a twist. Built with JQuery and Bootstrap.
 # TODO
-* [ ] cleanup and improve UI (CSS)
+* [x] cleanup and improve UI (CSS)
 * [x] connect panels and buttons
 * [x] add date display and clear button to highScores 
 * [x] remember last player and prefill his name
