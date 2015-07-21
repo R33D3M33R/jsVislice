@@ -1,6 +1,6 @@
 /*
  @author: Andrej Mernik
- @version: 0.7
+ @version: 0.7.1
 
 
  @licstart  The following is the entire license notice for the
@@ -181,6 +181,10 @@ var visliceController = {
         var key = e.keyCode;
         if (key >= 65 && key <= 90 && window.location.hash === '#game') {
             this.click(String.fromCharCode(key).toLowerCase());
+        } else if (key === 13 && window.location.hash === '#welcome') {
+            window.location.hash = 'game';
+            visliceView.displayButtons();
+            this.init();
         }
     },
     init: function() {
