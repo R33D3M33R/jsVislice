@@ -8,6 +8,22 @@ body, .btn, .form-control {
 h1, h2 {
     text-align: center;
 }
+#wrongGuesses > span {
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#wrongGuesses > span:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-bottom: 2px solid;
+    border-color: #FF0000;
+    transform:rotate(-45deg);
+}
+
 #welcome, #instructions, #highscores, #game {
     display: none;
 }
