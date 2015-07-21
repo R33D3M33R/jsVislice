@@ -47,7 +47,6 @@ var visliceLevels = {
     newLevel: function() {
         this.level++;
         visliceWords.selectWord();
-        visliceView.initKeys();
         visliceView.updateView();
     },
     isGameOver: function() {
@@ -160,8 +159,7 @@ var visliceController = {
         if (visliceWords.checkGuess()) {
             visliceLevels.newLevel();
         } else if (visliceLevels.isGameOver()) {
-            visliceScores.saveHighScores();
-            alert('Game over!');
+            this.gameOver();
         }
     },
     keyPress: function(e) {
@@ -181,7 +179,7 @@ var visliceController = {
     registerButtonBar: function(buttonBar) {
         var self = this;
         buttonBar.find('button[name=new]').on('click', function() {
-                window.location.href = '#welcome';
+                window.location.hash = '#welcome';
                 visliceView.displayButtons();
             }
         );
@@ -223,11 +221,18 @@ var visliceController = {
                 self.click($(this).html());
             }
         );
+    },
+    gameOver: function() {
+        visliceLevels.level = 0;
+        visliceWords.currentWordID = null;
+        visliceScores.saveHighScores();
+        window.location.hash = 'highscores';
+        visliceView.displayHighScores();
     }
 };
 
 var visliceView = {
-    initKeys: function() {
+    displayKeys: function() {
         var i;
         var self = this;
         $('#letters').find('.disabled').each(function() {self.toggleKey($(this).html())});
@@ -285,6 +290,7 @@ var visliceView = {
         this.displayWord();
         this.displayWrongGuesses();
         this.displayLives();
+        this.displayKeys();
         this.displayScore();
         this.displayLevel();
     },
