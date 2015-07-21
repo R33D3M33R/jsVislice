@@ -26,7 +26,7 @@ h1, h2 {
 #welcome, #instructions, #highscores, #game {
     display: none;
 }
-#welcome:target, #instructions:target, #highscores:target, #game:target, #lives > div {
+#welcome:target, #instructions:target, #highscores:target, #game:target {
     display: block;
 }
 .glyphicon-heart, .glyphicon-heart-empty {
@@ -42,4 +42,17 @@ body > .container:first-child {
 #letters button {
     width: 3em;
     height: 3em;
+}
+#letters {
+    padding: 15px;
+}
+@media (max-width:767px) {
+    .col-xs-6.col-sm-12.well.well-sm {
+        margin-bottom: 0;
+    }
+}
+@media (min-width:768px){
+    #lives > div {
+        display: block;
+    }
 }

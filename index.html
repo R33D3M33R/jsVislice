@@ -9,8 +9,8 @@
 <body>
     <div class="container">
         <div class="row" id="welcome">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
                 <h1>Welcome to jsVislice</h1>
                 <p>jsVislice is a JavaScript version of the pen and paper game Hangman (gallows == vislice in Slovenian) with a twist. After correctly guessing the word, you don't start over again, but advance to the next level with a harder word. How far can you get?</p>
                 <form>
@@ -33,28 +33,28 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-sm-3"></div>
         </div>
         <div class="row" id="instructions">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
                 <h1>How to play?</h1>
                 <p>The game selects a random word depending on your current level. The first and the last letter are shown and the remaining letters are representend as underscores (with the exception of those equal to the first and last letter). Your goal is to guess the correct word in limited number of tries. You will loose a life point (<span class="glyphicon glyphicon-heart"></span>) with a wrong guess and if you loose all of them it's game over.</p>
                 <p>But fear not, mighty adventurer, when you correctly guess a word, your health bar will refill and every five levels you will gain a bonus health point. How far can you get?</p>
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-sm-3"></div>
         </div>
         <div class="row" id="highscores">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
                 <h1>Hall of Fame</h1>
                 <div></div>
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-sm-3"></div>
         </div>
         <div class="row" id="game">
-            <div class="col-md-2"></div>
-            <div class="col-md-6 text-center">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-6 text-center">
                 <div class="row" id="word"></div>
                 <div class="row" id="wrongGuesses"></div>
                 <div id="letters">
@@ -66,18 +66,20 @@
                     <div class="row"><button class="btn btn-primary" id="keyZ">Z</button></div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="row well well-sm">Score: <span id="score"></span></div>
-                <div class="row well well-sm">Level: <span id="level"></span></div>
-                <div class="row well well-sm text-center" id="lives"></div>
+            <div class="col-sm-2">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-12 well well-sm">Score: <span id="score"></span></div>
+                    <div class="col-xs-6 col-sm-12 well well-sm">Level: <span id="level"></span></div>
+                    <div class="col-xs-12 col-sm-12 well well-sm text-center" id="lives"></div>
+                </div>
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-sm-2"></div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6" id="buttons">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" id="buttons">
                 <button class="btn btn-primary" name="new">New game</button>
                 <button class="btn btn-primary" name="play">Play</button>
                 <button class="btn btn-primary" name="continue">Continue</button>
@@ -85,7 +87,7 @@
                 <button class="btn btn-primary" name="clear">Clear Scores</button>
                 <button class="btn btn-primary" name="instructions">Instructions</button>
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-sm-3"></div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
