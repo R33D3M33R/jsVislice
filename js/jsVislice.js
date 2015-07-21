@@ -138,7 +138,7 @@ var visliceWords = {
             if (this.guesses.correct.indexOf(word.charAt(i)) === -1) {
                 this.currentWord += ' _ ';
             } else {
-                this.currentWord += word.charAt(i);
+                this.currentWord += ' ' + word.charAt(i) + ' ';
             }
         }
     },
