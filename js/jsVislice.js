@@ -32,7 +32,6 @@ var visliceLevels = {
     level: 0, // starting level
     selectedDifficulty: 'normal', // default difficulty
     difficultyDefaults: {easy: {lives: 6, levelupAt: 2, levelScore: 25}, normal: {lives: 6, levelupAt: 5, levelScore: 50}, hard: {lives: 6, levelupAt: 10, levelScore: 100}},
-    mergeLivesAt: 5, // merge small lives into big
     maxLives: 20,
     calculateLives: function() {
         var numLives = Math.floor((this.level - 1) / this.difficultyData().levelupAt) + this.difficultyData().lives;
@@ -238,15 +237,19 @@ var visliceController = {
     },
     gameOver: function() {
         visliceScores.saveHighScores();
+        // reset parameters
         visliceLevels.level = 0;
+        visliceLevels.selectedDifficulty = 'normal';
         visliceWords.numWrongGuesses = 0;
         visliceWords.currentWordID = null;
+        // display highscores
         window.location.hash = 'highscores';
         visliceView.displayHighScores();
     }
 };
 
 var visliceView = {
+    mergeLivesAt: 5, // merge small lives into big
     displayKeys: function() {
         var i;
         var self = this;
@@ -278,10 +281,10 @@ var visliceView = {
         var livesContainer = $('#lives');
         livesContainer.html('');
         var livesCalc = visliceLevels.calculateLives();
-        var livesLostSmall = Math.floor(livesCalc.lost % visliceLevels.mergeLivesAt);
-        var livesTotalSmall = Math.floor((livesCalc.total - livesCalc.lost) % visliceLevels.mergeLivesAt);
-        var livesLostBig = Math.floor(livesCalc.lost / visliceLevels.mergeLivesAt);
-        var livesTotalBig = Math.floor((livesCalc.total - livesCalc.lost) / visliceLevels.mergeLivesAt);
+        var livesLostSmall = Math.floor(livesCalc.lost % this.mergeLivesAt);
+        var livesTotalSmall = Math.floor((livesCalc.total - livesCalc.lost) % this.mergeLivesAt);
+        var livesLostBig = Math.floor(livesCalc.lost / this.mergeLivesAt);
+        var livesTotalBig = Math.floor((livesCalc.total - livesCalc.lost) / this.mergeLivesAt);
         for (i=0; i < livesLostSmall; i++) {
             livesContainer.append('<div class="glyphicon glyphicon-heart-empty"></div>')
         }
