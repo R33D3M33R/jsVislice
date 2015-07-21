@@ -219,6 +219,7 @@ var visliceController = {
                 window.location.hash = 'highscores';
                 visliceView.displayButtons();
                 visliceScores.clearStorage();
+                visliceView.displayHighScores();
             }
         );
         buttonBar.find('button[name=instructions]').on('click', function() {
@@ -352,11 +353,19 @@ var visliceView = {
     displayPlayerName: function() {
         var playerName = visliceScores.loadPlayerName();
         $('#playerName').val((playerName === 'Anonymous') ? '' : playerName);
+    },
+    loadWebFont: function(href) {
+        if (document.createStyleSheet) {
+            document.createStyleSheet(href);
+        } else {
+            $("head").append($('<link rel="stylesheet" href="' + href + '" type="text/css" />'));
+        }
     }
 };
 
 $(document).ready(function() {
     window.location.hash = 'welcome';
+    visliceView.loadWebFont('http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&subset=latin,latin-ext');
     visliceView.displayButtons();
     visliceView.displayPlayerName();
     visliceController.registerButtonBar($('#buttons'));
