@@ -40,7 +40,7 @@ var visliceLevels = {
         } else if (this.level > 1 && numLives >= this.maxLives) {
             return {total: this.maxLives, lost: visliceWords.guesses.wrong.length};
         } else {
-            return {total: this.difficultyData().lives, lost: 0};
+            return {total: this.difficultyData().lives, lost: visliceWords.guesses.wrong.length};
         }
     },
     newLevel: function() {
