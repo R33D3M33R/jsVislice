@@ -165,20 +165,22 @@ var visliceWords = {
 
 var visliceController = {
     click: function(key) {
-        visliceView.toggleKey(key);
-        visliceWords.doGuess(key.toLowerCase());
-        visliceWords.prepareWord();
-        visliceView.updateView();
-        if (visliceWords.checkGuess()) {
-            visliceLevels.newLevel();
-        } else if (visliceLevels.isGameOver()) {
-            this.gameOver();
+        if (visliceWords.guesses.correct.indexOf(key) === -1 && visliceWords.guesses.wrong.indexOf(key) === -1) {
+            visliceView.toggleKey(key);
+            visliceWords.doGuess(key);
+            visliceWords.prepareWord();
+            visliceView.updateView();
+            if (visliceWords.checkGuess()) {
+                visliceLevels.newLevel();
+            } else if (visliceLevels.isGameOver()) {
+                this.gameOver();
+            }
         }
     },
     keyPress: function(e) {
         var key = e.keyCode;
         if (key >= 65 && key <= 90 && window.location.hash === '#game') {
-            this.click(String.fromCharCode(key));
+            this.click(String.fromCharCode(key).toLowerCase());
         }
     },
     init: function() {
@@ -231,7 +233,7 @@ var visliceController = {
             self.keyPress(e);
         });
         letters.find('button').on('click', function() {
-                self.click($(this).html());
+                self.click($(this).html().toLowerCase());
             }
         );
     },
