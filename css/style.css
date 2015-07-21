@@ -1,21 +1,21 @@
-body, .btn {
+body, .btn, .form-control {
     font-family: 'Shadows Into Light Two', cursive;
     font-size: 18px;
+}
+#word, #wrongGuesses {
+    font-size: 30px;
 }
 h1, h2 {
     text-align: center;
 }
-
-
 #welcome, #instructions, #highscores, #game {
     display: none;
 }
-#welcome:target, #instructions:target, #highscores:target, #game:target {
+#welcome:target, #instructions:target, #highscores:target, #game:target, #lives > div {
     display: block;
 }
-#lives > div {
+.glyphicon-heart, .glyphicon-heart-empty {
     color: #FF0000;
-    display: block;
 }
 
 #lives .big-heart {
