@@ -237,10 +237,10 @@ var visliceController = {
         );
     },
     gameOver: function() {
+        visliceScores.saveHighScores();
         visliceLevels.level = 0;
         visliceWords.numWrongGuesses = 0;
         visliceWords.currentWordID = null;
-        visliceScores.saveHighScores();
         window.location.hash = 'highscores';
         visliceView.displayHighScores();
     }
