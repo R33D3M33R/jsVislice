@@ -277,7 +277,7 @@ var visliceView = {
         (visliceView.currentWord !== null) ? wordContainer.html(visliceWords.currentWord) : wordContainer.html('<div class="alert alert-danger">Couldn\'t select a random word.</div>');
     },
     displayWrongGuesses: function() {
-        $('#wrongGuesses').html('<strike>' + visliceWords.guesses.wrong.join(', ') + '</strike>')
+        $('#wrongGuesses').html((visliceWords.guesses.wrong.length > 0) ? visliceWords.guesses.wrong.join(', ') : '&nbsp;');
     },
     displayLives: function() {
         var i;
