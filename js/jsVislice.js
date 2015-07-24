@@ -119,22 +119,23 @@ var visliceWords = {
     currentWordID: null,
     currentWord: null,
     loadWords: function() {
+        var self = this;
         $.getJSON( "words/en.json", function(data) {
             $.each(data, function(key, value) {
-                this.wordlist.push(value);
+                self.wordlist[value['lvl']] = value['words'];
             });
         });
     },
     selectWord: function() {
-        var wordlistLength = this.wordlist.length;
-        if (wordlistLength > 0) {
-            this.currentWordID = Math.floor(Math.random() * wordlistLength);
+        if (this.wordlist.length > 0 && this.wordlist[visliceLevels.level] !== undefined) {
+            console.log(this.wordlist[visliceLevels.level]);
+            this.currentWordID = Math.floor(Math.random() * this.wordlist[visliceLevels.level].length);
             this.guesses = {correct: [], wrong: []};
             this.prepareWord();
         }
     },
     prepareWord: function() {
-        var word = this.wordlist[this.currentWordID];
+        var word = this.wordlist[visliceLevels.level][this.currentWordID];
         var wordLen = word.length;
         this.currentWord = '';
         if (this.guesses.correct.length === 0) {
@@ -150,7 +151,7 @@ var visliceWords = {
         }
     },
     doGuess: function(guess) {
-        if (this.wordlist[this.currentWordID].indexOf(guess) === -1) {
+        if (this.wordlist[visliceLevels.level][this.currentWordID].indexOf(guess) === -1) {
             this.totalWrongGuesses++;
             this.guesses.wrong.push(guess);
         } else {
@@ -158,7 +159,7 @@ var visliceWords = {
         }
     },
     checkGuess: function() {
-        var word = this.wordlist[this.currentWordID];
+        var word = this.wordlist[visliceLevels.level][this.currentWordID];
         var wordLen = word.length;
         for (var i=0; i < wordLen; i++) {
             if (this.guesses.correct.indexOf(word.charAt(i)) === -1) {

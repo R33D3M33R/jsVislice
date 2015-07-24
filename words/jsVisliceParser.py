@@ -42,7 +42,7 @@ class jsVisliceParser():
             output.write('[')
             for level in self.prepare_word_list():
                 json.dump(level, output)
-                if level.keys()[0] < self.num_levels:
+                if level['lvl'] < self.num_levels:
                     output.write(', ')
             output.write(']')
 
@@ -90,7 +90,7 @@ class jsVisliceParser():
             self.num_levels = int(math.ceil(word_list_length/self.min_words_for_difficulty))
             for i in range(self.num_levels):
                 j = i*self.min_words_for_difficulty
-                yield {i+1: [word['word'] for word in self.word_list[j:j+self.min_words_for_difficulty]]}
+                yield {'lvl': i+1, 'words': [word['word'] for word in self.word_list[j:j+self.min_words_for_difficulty]]}
 
 if __name__ == "__main__":
     parser = jsVisliceParser('en.txt', 'en')
