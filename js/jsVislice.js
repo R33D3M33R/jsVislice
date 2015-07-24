@@ -1,6 +1,6 @@
 /*
  @author: Andrej Mernik
- @version: 0.8
+ @version: 0.9
 
 
  @licstart  The following is the entire license notice for the
