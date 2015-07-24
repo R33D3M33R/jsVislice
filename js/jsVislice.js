@@ -113,11 +113,18 @@ var visliceScores = {
 };
 
 var visliceWords = {
-    wordlist: ['alligator', 'ant', 'bear', 'bee', 'bird', 'camel', 'cat', 'cheetah', 'chicken', 'chimpanzee', 'cow', 'crocodile', 'deer', 'dog', 'dolphin', 'duck', 'eagle', 'elephant', 'fish', 'fly', 'fox', 'frog', 'giraffe', 'goat', 'goldfish', 'hamster', 'hippopotamus', 'horse', 'kangaroo', 'kitten', 'lion', 'lobster', 'monkey', 'octopus', 'owl', 'panda', 'pig', 'puppy', 'rabbit', 'rat', 'scorpion', 'seal', 'shark', 'sheep', 'snail', 'snake', 'spider', 'squirrel', 'tiger', 'turtle', 'wolf', 'zebra'],
+    wordlist: [],
     totalWrongGuesses: 0, // number of wrong guesses
     guesses: {correct: [], wrong: []},
     currentWordID: null,
     currentWord: null,
+    loadWords: function() {
+        $.getJSON( "words/en.json", function(data) {
+            $.each(data, function(key, value) {
+                this.wordlist.push(value);
+            });
+        });
+    },
     selectWord: function() {
         var wordlistLength = this.wordlist.length;
         if (wordlistLength > 0) {
@@ -373,4 +380,5 @@ $(document).ready(function() {
     visliceView.displayPlayerName();
     visliceController.registerButtonBar($('#buttons'));
     visliceController.registerKeys($('#letters'));
+    visliceWords.loadWords();
 });
