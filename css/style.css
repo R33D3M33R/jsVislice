@@ -1,3 +1,4 @@
+/* fonts start */
 body, .btn, .form-control {
     font-family: 'Shadows Into Light Two', cursive;
     font-size: 18px;
@@ -8,6 +9,18 @@ body, .btn, .form-control {
 h1, h2 {
     text-align: center;
 }
+#lives .big-heart {
+    font-size: 200%;
+}
+/* fonts end */
+
+/* colors start */
+.glyphicon-heart, .glyphicon-heart-empty {
+    color: #FF0000;
+}
+/* colors end */
+
+/* positioning and dimensions start */
 #wrongGuesses > span {
     position: relative;
     padding-left: 10px;
@@ -23,19 +36,6 @@ h1, h2 {
     border-color: #FF0000;
     transform:rotate(-45deg);
 }
-#welcome, #instructions, #highscores, #game {
-    display: none;
-}
-#welcome:target, #instructions:target, #highscores:target, #game:target {
-    display: block;
-}
-.glyphicon-heart, .glyphicon-heart-empty {
-    color: #FF0000;
-}
-
-#lives .big-heart {
-    font-size: 200%;
-}
 body > .container:first-child {
     min-height: 500px;
 }
@@ -46,6 +46,18 @@ body > .container:first-child {
 #letters {
     padding: 15px;
 }
+/* positioning and dimensions end */
+
+/* visibility start */
+#welcome, #instructions, #highscores, #game {
+    display: none;
+}
+#welcome:target, #instructions:target, #highscores:target, #game:target {
+    display: block;
+}
+/* visibility end */
+
+/* responsive hacks start */
 @media (max-width:767px) {
     .col-xs-6.col-sm-12.well.well-sm {
         margin-bottom: 0;
@@ -56,3 +68,4 @@ body > .container:first-child {
         display: block;
     }
 }
+/* responsive hacks end */
