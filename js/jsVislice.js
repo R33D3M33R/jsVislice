@@ -102,7 +102,7 @@ var visliceScores = {
         return (itemB.score - itemA.score);
     },
     calculateScore: function() {
-        return (visliceWords.numWrongGuesses > 0) ? Math.floor((visliceLevels.level - 1) * visliceLevels.difficultyData().levelScore / visliceWords.numWrongGuesses) : Math.floor((visliceLevels.level - 1) * visliceLevels.difficultyData().levelScore);
+        return (visliceWords.totalWrongGuesses > 0) ? Math.floor((visliceLevels.level - 1) * visliceLevels.difficultyData().levelScore / visliceWords.totalWrongGuesses) : Math.floor((visliceLevels.level - 1) * visliceLevels.difficultyData().levelScore);
     },
     clearStorage: function() {
         if (this.checkStorage() && localStorage.length > 0) localStorage.clear();
@@ -114,7 +114,7 @@ var visliceScores = {
 
 var visliceWords = {
     wordlist: ['alligator', 'ant', 'bear', 'bee', 'bird', 'camel', 'cat', 'cheetah', 'chicken', 'chimpanzee', 'cow', 'crocodile', 'deer', 'dog', 'dolphin', 'duck', 'eagle', 'elephant', 'fish', 'fly', 'fox', 'frog', 'giraffe', 'goat', 'goldfish', 'hamster', 'hippopotamus', 'horse', 'kangaroo', 'kitten', 'lion', 'lobster', 'monkey', 'octopus', 'owl', 'panda', 'pig', 'puppy', 'rabbit', 'rat', 'scorpion', 'seal', 'shark', 'sheep', 'snail', 'snake', 'spider', 'squirrel', 'tiger', 'turtle', 'wolf', 'zebra'],
-    numWrongGuesses: 0, // number of wrong guesses
+    totalWrongGuesses: 0, // number of wrong guesses
     guesses: {correct: [], wrong: []},
     currentWordID: null,
     currentWord: null,
@@ -144,7 +144,7 @@ var visliceWords = {
     },
     doGuess: function(guess) {
         if (this.wordlist[this.currentWordID].indexOf(guess) === -1) {
-            this.numWrongGuesses++;
+            this.totalWrongGuesses++;
             this.guesses.wrong.push(guess);
         } else {
             this.guesses.correct.push(guess);
@@ -160,7 +160,6 @@ var visliceWords = {
         }
         return true;
     }
-
 };
 
 var visliceController = {
@@ -247,7 +246,7 @@ var visliceController = {
         // reset parameters
         visliceLevels.level = 0;
         visliceLevels.selectedDifficulty = 'normal';
-        visliceWords.numWrongGuesses = 0;
+        visliceWords.totalWrongGuesses = 0;
         visliceWords.currentWordID = null;
         // display highscores
         window.location.hash = 'highscores';
