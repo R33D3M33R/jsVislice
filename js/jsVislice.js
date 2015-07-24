@@ -128,10 +128,11 @@ var visliceWords = {
     },
     selectWord: function() {
         if (this.wordlist.length > 0 && this.wordlist[visliceLevels.level] !== undefined) {
-            console.log(this.wordlist[visliceLevels.level]);
             this.currentWordID = Math.floor(Math.random() * this.wordlist[visliceLevels.level].length);
             this.guesses = {correct: [], wrong: []};
             this.prepareWord();
+        } else {
+            visliceController.gameOver();
         }
     },
     prepareWord: function() {
