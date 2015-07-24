@@ -88,9 +88,9 @@ class jsVisliceParser():
         else:
             self.word_list = sorted(self.word_list, key=itemgetter('difficulty'))
             self.num_levels = int(math.ceil(word_list_length/self.min_words_for_difficulty))
-            for i in range(0, self.num_levels):
-                yield {i+1: [word['word'] for word in self.word_list[i:i+self.num_levels]]}
-
+            for i in range(self.num_levels):
+                j = i*self.min_words_for_difficulty
+                yield {i: [word['word'] for word in self.word_list[j:j+self.min_words_for_difficulty]]}
 
 if __name__ == "__main__":
     parser = jsVisliceParser('en.txt', 'en')
